@@ -1,18 +1,17 @@
 const path = require("path");
-const entryPath = "js";
 const entryFile = "app.js";
 
 module.exports = {
-  entry: `./${entryPath}/${entryFile}`,
+  entry: `./js/${entryFile}`,
   output: {
     filename: "out.js",
-    path: path.resolve(__dirname, `${entryPath}/build`)
+    path: path.resolve(__dirname, `build`)
   },
   devServer: {
-    contentBase: path.join(__dirname, `${entryPath}`),
+    contentBase: path.join(__dirname, `/`),
     publicPath: "/build/",
     compress: true,
-    port: 3001
+    port: 3000
   },
   module: {
     rules: [
@@ -23,6 +22,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
+        exclude: /node_modules/,
         use: ['style-loader', 'css-loader', 'sass-loader']
       }
     ]
