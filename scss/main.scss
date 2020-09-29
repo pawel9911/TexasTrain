@@ -56,7 +56,7 @@ body{
             right: 20px;
         }
         &::after{
-            content: '';
+            content: '';  // url(../img/wheel.jpg)
             display: block;
             clear: both;
             width: 30px;
