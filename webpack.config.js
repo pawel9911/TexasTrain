@@ -26,14 +26,21 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
-        test: /\.(jpe?g|gif|png|svg)$/,
-        loader: "file-loader",
-        options: {
-          name: "[name].[ext]",
-          publicPath: "/images/",
-          outputPath: "/images/"
-        }
-      }
+        test: /\.(png|jpe?g|gif|jpg)$/i,
+        loader: 'file-loader'
+      },
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
+      },
+      
     ]
   }
 };
