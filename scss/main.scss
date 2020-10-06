@@ -15,6 +15,7 @@ body{
     border-radius: 20px;
     display: flex;
     align-items: flex-end;
+    background-image: url(../img/westernTown.jpg);
     .shadowBox{
         width:  100%;
         height: 100%;
@@ -33,8 +34,26 @@ body{
         }
     }
 }
+@keyframes rondo {
+    0%{
+        transform: rotate(0deg);
+        transform-origin: 50% 50%;
+    }
+    100%{
+        transform: rotate(360deg);
 
-@mixin wheel ($height, $top) {
+    }
+}
+@keyframes ride {
+    0%{
+        left: 0;
+    }
+    100%{
+        left: -260px;
+    }
+}
+
+@mixin wheel ($height, $top, $animation, $ride) {
             width: 250px;
             height: $height;
             margin: 0 5px 20px 0;
@@ -42,31 +61,32 @@ body{
             background-size: cover;
             border-radius: 10px;
             position: relative;
+
+            animation: $ride 4s linear infinite;
+
         &::before{
-            content: '';
+            content: url(../img/wheel.png);  
             display: block;
             clear: both;
             width: 30px;
             height: 30px;
-
-            border: 1px solid black;
             border-radius: 100%;
             position: absolute;
             top: $top;
             right: 20px;
+            animation: $animation 3s linear infinite ;
         }
         &::after{
-            content: '';  // url(../img/wheel.jpg)
+            content: url(../img/wheel.png);  
             display: block;
             clear: both;
             width: 30px;
             height: 30px;
-
-            border: 1px solid black;
             border-radius: 100%;
             position: absolute;
             top: $top;
             left: 20px;
+            animation: $animation 3s linear infinite ;
         }
 }
 
@@ -74,13 +94,15 @@ body{
     display: none;
     width: 100%;
     height: 50%;
-    border: 1px solid black;
     flex-direction: row;
     align-items: flex-end;
+    box-sizing: content-box;
     .bigTrain{
-        @include wheel(100px, 85px)
+        @include wheel(100px, 85px, rondo, ride);
+        background-image: url(../img/bigTrain.jpg);
     }
     .smallTrain{
-        @include wheel(30px, 15px)
+        @include wheel(30px, 15px, rondo, ride);
+        background-image: url(../img/smallTrain.jpg)
     }
 }
