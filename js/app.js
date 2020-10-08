@@ -13,14 +13,32 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 
-    var canvas = document.getElementById("myCanvas");
-    var ctx = canvas.getContext("2d");
-    var x = canvas.width/2;
-    var y = canvas.height-58;
-    var dy = -2;
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+    
+    let y = canvas.height-58;
+    
+    let dy = -2;
+    const ballRadius = 10;
+    let press = false;
+
+    document.addEventListener("keydown", keyDownHandler);
+    document.addEventListener("keyup", keyUpHandler);
+
+    function keyDownHandler(e) {
+        if(e.keyCode == 32){
+            press = true;
+        }
+    }
+    function keyUpHandler(e) {
+        if(e.keyCode == 32) {
+            press = false;
+        }
+    }
+
     const jump  = () =>{
         ctx.beginPath();
-        ctx.arc(x, y, 10, 0, Math.PI*2);
+        ctx.arc(133, y, ballRadius, 0, Math.PI*2);
         ctx.fillStyle = "#0095DD";
         ctx.fill();
         ctx.closePath();
@@ -28,15 +46,16 @@ document.addEventListener('DOMContentLoaded', function(){
     const clearJump = () =>{
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         jump();
-        y += dy;
+        if((press == true) && (y >= 93)){
+            y += dy;
+        }
+        else if((press == false) && (y <194)){
+            y -= dy
+        }
+        // if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
+        //     dy = -dy;
+        // }
     }
-    const falldown = () =>{
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        jump();
-        y -= dy;
-    }
-    canvas.addEventListener('mouseover', clearJump);
-    canvas.addEventListener('mouseout', falldown);
 
 
 
@@ -55,13 +74,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 
-    
 
     buttonStart.addEventListener("click", function(){
         shadowBox.style.display = "none";
         this.style.display = "none";
         gameBox.style.display = "flex";
-
+        setInterval(clearJump, 10)
         // let drawTrain = setInterval(() => {
         //     const indexTrain = Math.floor(Math.random()*2)
         //     const nextTrain = optionsTrain[indexTrain].cloneNode();
