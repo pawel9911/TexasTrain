@@ -53,7 +53,7 @@ body{
     }
 }
 
-@mixin wheel ($height, $top, $animation, $ride) {
+@mixin train ($height, $top, $animation, $ride) {
             width: 250px;
             height: $height;
             margin: 0 5px 20px 0;
@@ -61,8 +61,8 @@ body{
             background-size: cover;
             border-radius: 10px;
             position: relative;
-
-            animation: $ride 4s linear infinite;
+            left: 0px;
+            // animation: $ride 4s linear infinite;
 
         &::before{
             content: url(../img/wheel.png);  
@@ -94,15 +94,30 @@ body{
     display: none;
     width: 100%;
     height: 50%;
-    flex-direction: row;
-    align-items: flex-end;
-    box-sizing: content-box;
+    position: relative;
+    .cowboy{
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        border: 1px solid black;
+        top: 157px;
+        left: 113px;
+    }
+    .train{
+        width: 150%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        border: 1px solid black;
+        position: relative;
+    }
     .bigTrain{
-        @include wheel(100px, 85px, rondo, ride);
+        @include train(100px, 85px, rondo, ride);
         background-image: url(../img/bigTrain.jpg);
     }
     .smallTrain{
-        @include wheel(30px, 15px, rondo, ride);
+        @include train(30px, 15px, rondo, ride);
         background-image: url(../img/smallTrain.jpg)
     }
 }
