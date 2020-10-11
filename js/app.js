@@ -46,18 +46,22 @@ document.addEventListener('DOMContentLoaded', function(){
 
         const moveTrain = setInterval(() => {
             allTrain.forEach((tr)=>{
-                tr.style.left = `${leftChange}px`;
+                tr.style.left = `-${leftChange}px`;
             })
-            if(leftChange>=-250){
-                leftChange-=0.625;
-            }
+            if(leftChange<=250){
+                leftChange+=0.625;
+             }
             else{leftChange = 0}
+            //kolizja 
+            if((`${-positionCowboyStartX-0.125}px` === allTrain[1].style.left)&&(positionCowboyStartY>90)){
+                console.log('kolizja x')
+            }
         }, 10)
 
         document.addEventListener("keydown", keyDownHandler);
         document.addEventListener("keyup", keyUpHandler);
 
-
+        
     })
 
 })
