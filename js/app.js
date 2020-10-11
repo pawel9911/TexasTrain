@@ -7,16 +7,21 @@ document.addEventListener('DOMContentLoaded', function(){
     // backgroundImg.style.backgroundImage = `url(${ddd})`;
  
     const shadowBox = document.querySelector(".shadowBox");
-    const buttonStart = shadowBox.querySelector("button");
     const gameBox = document.querySelector(".gameBox");
-    const trainBox = document.querySelector('.train');
+    const trainBox = document.querySelector('.trainBox');
+    const buttonStart = shadowBox.querySelector("button");
     const cowboy = document.querySelector('.cowboy');
-    const optionsTrain = [document.querySelector('.smallTrain'), document.querySelector('.bigTrain')];
-    const allTrain = [...document.querySelector('.train').children];
-    let leftChange = 0;
 
+    const optionsTrain = [document.querySelector('.smallTrain'), document.querySelector('.bigTrain')];
+    let allTrain = [...document.querySelector('.trainBox').children];
+    
+    let leftChange = 0;
     const positionCowboyStartX = 113;
     let positionCowboyStartY = 157;
+
+    let score = 0;
+    const counterScore = document.querySelector('.score');
+    
 
 
     function keyDownHandler(e) {
@@ -26,7 +31,11 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     }
     function keyUpHandler(e) {
-        if(e.keyCode == 32) {
+        if((e.keyCode == 32)&&(allTrain[1].className === 'bigTrain')) {
+            positionCowboyStartY = 87;
+            cowboy.style.top = `${positionCowboyStartY}px`;
+        }
+        else{
             positionCowboyStartY = 157;
             cowboy.style.top = `${positionCowboyStartY}px`;
         }
@@ -41,6 +50,9 @@ document.addEventListener('DOMContentLoaded', function(){
             const nextTrain = optionsTrain[indexTrain].cloneNode();
             trainBox.appendChild(nextTrain);
             allTrain.push(nextTrain);
+            allTrain.shift();
+            score++;
+            counterScore.innerText = `Score: ${score}`
             trainBox.firstElementChild.parentElement.removeChild(trainBox.firstElementChild);
         }, 4000);
 
@@ -52,9 +64,13 @@ document.addEventListener('DOMContentLoaded', function(){
                 leftChange+=0.625;
              }
             else{leftChange = 0}
-            //kolizja 
-            if((`${-positionCowboyStartX-0.125}px` === allTrain[1].style.left)&&(positionCowboyStartY>90)){
-                console.log('kolizja x')
+            if((`${-positionCowboyStartX-0.125}px` === allTrain[1].style.left)&&(positionCowboyStartY>90)&&(allTrain[1].className === 'bigTrain')){
+                clearInterval(moveTrain);
+                clearInterval(addTrain);
+                leftChange = 0;
+                shadowBox.style.display = "flex";
+                gameBox.style.display = "none";
+                alert('Game Over');
             }
         }, 10)
 
