@@ -22,9 +22,8 @@ document.addEventListener('DOMContentLoaded', function(){
     let score = 0;
     const counterScore = document.querySelector('.score');
     
-
-
     function keyDownHandler(e) {
+        console.log(e.isTrusted)
         if((e.keyCode == 32)&&(positionCowboyStartY>90)){//warunek zeby uciekało tylko do danej odleglosci
             positionCowboyStartY -= 70;
             cowboy.style.top = `${positionCowboyStartY}px`;
@@ -52,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function(){
             allTrain.push(nextTrain);
             allTrain.shift();
             score++;
-            counterScore.innerText = `Score: ${score}`
+            counterScore.innerText = `Score: ${score}`;
             trainBox.firstElementChild.parentElement.removeChild(trainBox.firstElementChild);
         }, 4000);
 
@@ -63,16 +62,30 @@ document.addEventListener('DOMContentLoaded', function(){
             if(leftChange<=250){
                 leftChange+=0.625;
              }
-            else{leftChange = 0}
+            else{
+                leftChange = 0
+            }
             if((`${-positionCowboyStartX-0.125}px` === allTrain[1].style.left)&&(positionCowboyStartY>90)&&(allTrain[1].className === 'bigTrain')){
                 clearInterval(moveTrain);
                 clearInterval(addTrain);
                 leftChange = 0;
+                score = 0;
+                counterScore.innerText = `Score: ${score}`
                 shadowBox.style.display = "flex";
                 gameBox.style.display = "none";
                 alert('Game Over');
             }
         }, 10)
+
+        // const inter = setInterval(()=>{
+        //     keyDownHandler(this);
+        //     console.log('inter');
+        // },500)
+        // const mediolan =setTimeout(()=>{
+        //     clearInterval(inter);
+        //     keyUpHandler(this);
+        //     console.log('mediolan')
+        // },2010)
 
         document.addEventListener("keydown", keyDownHandler);
         document.addEventListener("keyup", keyUpHandler);
