@@ -21,16 +21,30 @@ document.addEventListener('DOMContentLoaded', function(){
 
     let score = 0;
     const counterScore = document.querySelector('.score');
+
+    let press = true;
     
     function keyDownHandler(e) {
-        console.log(e.isTrusted)
-        if((e.keyCode == 32)&&(positionCowboyStartY>90)){//warunek zeby uciekało tylko do danej odleglosci
+        if((e.keyCode == 32)&&(press === true)){//warunek zeby uciekało tylko do danej odleglosci
             positionCowboyStartY -= 70;
             cowboy.style.top = `${positionCowboyStartY}px`;
         }
+        else if((e.keyCode == 32)&&(allTrain[1].className === 'bigTrain')&&((press === true)||(press === false))) {
+            positionCowboyStartY = 87;
+            cowboy.style.top = `${positionCowboyStartY}px`;
+        }
+        else if ((e.keyCode == 32)&&(allTrain[1].className === 'smallTrain')&&(press ===false)) {
+            positionCowboyStartY = 157;
+            cowboy.style.top = `${positionCowboyStartY}px`;
+        }
+        press = false;
     }
     function keyUpHandler(e) {
-        if((e.keyCode == 32)&&(allTrain[1].className === 'bigTrain')) {
+        if((e.keyCode == 32)&&(allTrain[1].className === 'bigTrain')&&(press === false)) {
+            positionCowboyStartY = 87;
+            cowboy.style.top = `${positionCowboyStartY}px`;
+        }
+        else if ((e.keyCode == 32)&&(allTrain[0].className === 'bigTrain')&&(press === false)) {
             positionCowboyStartY = 87;
             cowboy.style.top = `${positionCowboyStartY}px`;
         }
@@ -38,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function(){
             positionCowboyStartY = 157;
             cowboy.style.top = `${positionCowboyStartY}px`;
         }
+        press = true;
     }
 
     buttonStart.addEventListener("click", function(){
@@ -75,17 +90,19 @@ document.addEventListener('DOMContentLoaded', function(){
                 gameBox.style.display = "none";
                 alert('Game Over');
             }
+            else if ((allTrain[0].className === 'bigTrain')&&(allTrain[1].className === 'smallTrain')&&(allTrain[0].style.left === `${-positionCowboyStartX-40.125}px`)){
+                positionCowboyStartY = 157;
+                cowboy.style.top = `${positionCowboyStartY}px`;
+            }
         }, 10)
 
-        // const inter = setInterval(()=>{
-        //     keyDownHandler(this);
-        //     console.log('inter');
-        // },500)
-        // const mediolan =setTimeout(()=>{
-        //     clearInterval(inter);
-        //     keyUpHandler(this);
-        //     console.log('mediolan')
-        // },2010)
+        let inter = setInterval(()=>{
+            console.log('witaj')
+        },500)
+        let time =setTimeout(()=>{
+            clearInterval(inter)
+            console.log('czyszczę')
+        },2010)
 
         document.addEventListener("keydown", keyDownHandler);
         document.addEventListener("keyup", keyUpHandler);
