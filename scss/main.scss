@@ -10,6 +10,7 @@ body{
 .mainBox{
     width: 900px;
     height: 500px;
+    overflow: hidden;
     background:  no-repeat center;
     background-size: cover;
     border-radius: 20px;
@@ -108,7 +109,6 @@ body{
         display: flex;
         flex-direction: row;
         align-items: flex-end;
-        // border: 1px solid black;
         position: relative;
     }
     .bigTrain{
