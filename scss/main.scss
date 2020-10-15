@@ -96,11 +96,12 @@ body{
         color: rgb(105, 57, 27);
     }
     .cowboy{
+        background: url(../img/cowboy.png) center 3px no-repeat;
+        background-size: cover;
         width: 40px;
-        height: 40px;
+        height: 70px;
         position: absolute;
-        border: 1px solid black;
-        top: 157px;
+        top: 130px;
         left: 113px;
     }
     .trainBox{
