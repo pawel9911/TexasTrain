@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function(){
     
     let leftChange = 0;
     const positionCowboyStartX = 113;
-    let positionCowboyStartY = 130; 
+    let positionCowboyStartY = 130;
 
     let score = 0;
     const counterScore = document.querySelector('.score');
@@ -107,8 +107,23 @@ document.addEventListener('DOMContentLoaded', function(){
             })
 
             //Poruszanie
-            if(leftChange<250){
-                leftChange+=0.625;
+            if((leftChange<250)&&(score<=5)){
+                leftChange+=0.9;
+            }
+            else if((leftChange<250)&&(score>5)&&(score<=20)){
+                leftChange+=1.25;
+            }
+            else if((leftChange<250)&&(score>20)&&(score<=40)){
+                leftChange+=1.5;
+            }
+            else if((leftChange<250)&&(score>40)&&(score<=65)){
+                leftChange+=2.05;
+            }
+            else if((leftChange<250)&&(score>65)&&(score<=100)){
+                leftChange+=2.25;
+            }
+            else if((leftChange<250)&&(score>100)){
+                leftChange+=2.5;                
             }
             else{
                 leftChange = 0;
@@ -123,7 +138,11 @@ document.addEventListener('DOMContentLoaded', function(){
             }
 
             //Kolizja
-            if((`${-positionCowboyStartX-0.125}px` === allTrain[1].style.left)&&(positionCowboyStartY>90)&&(allTrain[1].className === 'bigTrain')){
+            let positionLeftFirst = Math.floor(Number(allTrain[1].style.left.split('p')[0]));
+            let positionLeftZero = Math.floor(Number(allTrain[0].style.left.split('p')[0]));
+            
+            
+            if((-positionCowboyStartX === positionLeftFirst)&&(positionCowboyStartY>90)&&(allTrain[1].className === 'bigTrain')){
                 clearInterval(moveTrain);
                 leftChange = 0;
                 score = 0;
@@ -134,8 +153,7 @@ document.addEventListener('DOMContentLoaded', function(){
             }
 
             //Upadek
-            else if ((allTrain[0].className === 'bigTrain')&&(allTrain[1].className === 'smallTrain')&&(allTrain[0].style.left === `${-positionCowboyStartX-25.125}px`)){
-                console.log(allTrain[0].style.left)
+            else if ((allTrain[0].className === 'bigTrain')&&(allTrain[1].className === 'smallTrain')&&(positionLeftZero === -positionCowboyStartX-25)){
                 positionCowboyStartY = 130;
                 cowboy.style.top = `${positionCowboyStartY}px`;
             }
@@ -150,7 +168,6 @@ document.addEventListener('DOMContentLoaded', function(){
                 score+=5;
                 counterScore.innerText = `Score: ${score}`;
             }
-            console.log(cowboy.getBoundingClientRect().y, money.getBoundingClientRect().y)
         }, 10)
 
         document.addEventListener("keydown", keyDownHandler);
