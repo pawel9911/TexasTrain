@@ -24,71 +24,37 @@ document.addEventListener('DOMContentLoaded', function(){
             positionCowboyStartY -= 110;
             cowboy.style.top = `${positionCowboyStartY}px`;
         }
-        else if((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'smallTrain')&&(allTrain[1].className === 'smallTrain')){
-            positionCowboyStartY = 130;
-            cowboy.style.top = `${positionCowboyStartY}px`;
+        else if(((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'smallTrain')&&(allTrain[1].className === 'smallTrain'))||
+                ((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'smallTrain')&&(allTrain[1].className === 'bigTrain')&&(leftChange<80))||
+                ((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'bigTrain')&&(allTrain[1].className === 'smallTrain')&&(leftChange > positionCowboyStartX+40.125))){
+                    positionCowboyStartY = 130;
+                    cowboy.style.top = `${positionCowboyStartY}px`;
         }
-        else if((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'smallTrain')&&(allTrain[1].className === 'bigTrain')&&(leftChange <= positionCowboyStartX)&&(leftChange>80)){
-            positionCowboyStartY = 60;
-            cowboy.style.top = `${positionCowboyStartY}px`;
-        }
-        else if((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'smallTrain')&&(allTrain[1].className === 'bigTrain')&&(leftChange<80)){
-            positionCowboyStartY = 130;
-            cowboy.style.top = `${positionCowboyStartY}px`;
-        }
-        else if((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'smallTrain')&&(allTrain[1].className === 'bigTrain')&&(leftChange > positionCowboyStartX)){
-            positionCowboyStartY = 60;
-            cowboy.style.top = `${positionCowboyStartY}px`;
-        }
-        else if((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'bigTrain')&&(allTrain[1].className === 'bigTrain')){
-            positionCowboyStartY = 60;
-            cowboy.style.top = `${positionCowboyStartY}px`;
-        }
-        else if((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'bigTrain')&&(allTrain[1].className === 'smallTrain')&&(leftChange < positionCowboyStartX+40.125)){
-            positionCowboyStartY = 60;
-            cowboy.style.top = `${positionCowboyStartY}px`;
-        }
-        else if((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'bigTrain')&&(allTrain[1].className === 'smallTrain')&&(leftChange > positionCowboyStartX+40.125)){
-            positionCowboyStartY = 130;
-            cowboy.style.top = `${positionCowboyStartY}px`;
+        else if(((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'smallTrain')&&(allTrain[1].className === 'bigTrain')&&(leftChange <= positionCowboyStartX)&&(leftChange>80))||
+                ((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'smallTrain')&&(allTrain[1].className === 'bigTrain')&&(leftChange > positionCowboyStartX))||
+                ((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'bigTrain')&&(allTrain[1].className === 'bigTrain'))||
+                ((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'bigTrain')&&(allTrain[1].className === 'smallTrain')&&(leftChange < positionCowboyStartX+40.125))){
+                   positionCowboyStartY = 60;
+                   cowboy.style.top = `${positionCowboyStartY}px`;
         }
         press = false;
     }
 
     function keyUpHandler(e) {
         //1
-        if((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'smallTrain')&&(allTrain[1].className === 'smallTrain')){
+        if(((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'smallTrain')&&(allTrain[1].className === 'smallTrain'))||
+            ((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'smallTrain')&&(allTrain[1].className === 'bigTrain')&&(leftChange<80))||
+            ((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'bigTrain')&&(allTrain[1].className === 'smallTrain')&&(leftChange > positionCowboyStartX+40.125))){
             positionCowboyStartY = 130;
             cowboy.style.top = `${positionCowboyStartY}px`;
         }
+       
         //2
-        else if((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'smallTrain')&&(allTrain[1].className === 'bigTrain')&&(leftChange <= positionCowboyStartX)&&(leftChange>80)){
+        else if(((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'smallTrain')&&(allTrain[1].className === 'bigTrain')&&(leftChange <= positionCowboyStartX)&&(leftChange>80))||
+            ((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'smallTrain')&&(allTrain[1].className === 'bigTrain')&&(leftChange > positionCowboyStartX))||
+            ((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'bigTrain')&&(allTrain[1].className === 'bigTrain'))||
+            ((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'bigTrain')&&(allTrain[1].className === 'smallTrain')&&(leftChange < positionCowboyStartX+40.125))){
             positionCowboyStartY = 60;
-            cowboy.style.top = `${positionCowboyStartY}px`;
-        }
-        //3
-        else if((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'smallTrain')&&(allTrain[1].className === 'bigTrain')&&(leftChange<80)){
-            positionCowboyStartY = 130;
-            cowboy.style.top = `${positionCowboyStartY}px`;
-        }
-        //4
-        else if((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'smallTrain')&&(allTrain[1].className === 'bigTrain')&&(leftChange > positionCowboyStartX)){
-            positionCowboyStartY = 60;
-            cowboy.style.top = `${positionCowboyStartY}px`;
-        }
-        //5
-        else if((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'bigTrain')&&(allTrain[1].className === 'bigTrain')){
-            positionCowboyStartY = 60;
-            cowboy.style.top = `${positionCowboyStartY}px`;
-        }
-        //6 
-        else if((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'bigTrain')&&(allTrain[1].className === 'smallTrain')&&(leftChange < positionCowboyStartX+40.125)){
-            positionCowboyStartY = 60;
-            cowboy.style.top = `${positionCowboyStartY}px`;
-        }
-        //7
-        else if((e.keyCode == 32)&&(press === false)&&(allTrain[0].className === 'bigTrain')&&(allTrain[1].className === 'smallTrain')&&(leftChange > positionCowboyStartX+40.125)){
-            positionCowboyStartY = 130;
             cowboy.style.top = `${positionCowboyStartY}px`;
         }
         press = true;
@@ -105,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 tr.style.left = `-${leftChange}px`;
                 tra.appendChild(tr);
             })
-
+            console.log(cowboy.getBoundingClientRect())
             //Poruszanie
             if((leftChange<250)&&(score<=5)){
                 leftChange+=0.9;
